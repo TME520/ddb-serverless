@@ -2,60 +2,6 @@
   "AWSTemplateFormatVersion": "2010-09-09",
   "Description": "The AWS CloudFormation template for this Serverless application",
   "Resources": {
-    "ServerlessDeploymentBucket": {
-      "Type": "AWS::S3::Bucket",
-      "Properties": {
-        "BucketEncryption": {
-          "ServerSideEncryptionConfiguration": [
-            {
-              "ServerSideEncryptionByDefault": {
-                "SSEAlgorithm": "AES256"
-              }
-            }
-          ]
-        }
-      }
-    },
-    "ServerlessDeploymentBucketPolicy": {
-      "Type": "AWS::S3::BucketPolicy",
-      "Properties": {
-        "Bucket": {
-          "Ref": "ServerlessDeploymentBucket"
-        },
-        "PolicyDocument": {
-          "Statement": [
-            {
-              "Action": "s3:*",
-              "Effect": "Deny",
-              "Principal": "*",
-              "Resource": [
-                {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":s3:::",
-                      {
-                        "Ref": "ServerlessDeploymentBucket"
-                      },
-                      "/*"
-                    ]
-                  ]
-                }
-              ],
-              "Condition": {
-                "Bool": {
-                  "aws:SecureTransport": false
-                }
-              }
-            }
-          ]
-        }
-      }
-    },
     "QueryLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
@@ -151,10 +97,8 @@
       "Type": "AWS::Lambda::Function",
       "Properties": {
         "Code": {
-          "S3Bucket": {
-            "Ref": "ServerlessDeploymentBucket"
-          },
-          "S3Key": "serverless/graphql-api/dev/1599966446742-2020-09-13T03:07:26.742Z/graphql-api.zip"
+          "S3Bucket": "seegsontomorrowtogether",
+          "S3Key": "serverless/graphql-api/dev/1599994901405-2020-09-13T11:01:41.405Z/graphql-api.zip"
         },
         "FunctionName": "graphql-api-dev-query",
         "Handler": "handler.query",
@@ -177,14 +121,14 @@
         "QueryLogGroup"
       ]
     },
-    "QueryLambdaVersioncG2deafghFAbYYxHG4rkHfFMcwvOpESrpCreYd5M4": {
+    "QueryLambdaVersionzm43hXxiYlRgGDSYqOXfMrvPIX9KcgJsU0Is6S0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "QueryLambdaFunction"
         },
-        "CodeSha256": "YSwxwcBTYw8yd3bOfAQi7QBiRO4tX4v3g1YDpgiq9KU="
+        "CodeSha256": "f8mSqenE0WRrYXaU49apmx2j2PsWXv9PokhxHQhiAcc="
       }
     },
     "ApiGatewayRestApi": {
@@ -257,7 +201,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1599966444189": {
+    "ApiGatewayDeployment1599994898744": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -328,14 +272,12 @@
   },
   "Outputs": {
     "ServerlessDeploymentBucketName": {
-      "Value": {
-        "Ref": "ServerlessDeploymentBucket"
-      }
+      "Value": "seegsontomorrowtogether"
     },
     "QueryLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "QueryLambdaVersioncG2deafghFAbYYxHG4rkHfFMcwvOpESrpCreYd5M4"
+        "Ref": "QueryLambdaVersionzm43hXxiYlRgGDSYqOXfMrvPIX9KcgJsU0Is6S0"
       }
     },
     "ServiceEndpoint": {

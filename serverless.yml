@@ -26,7 +26,11 @@ provider:
     maxPreviousDeploymentArtifacts: 10
     blockPublicAccess: true
     tags:
-      schneider: zupper
+      schneider: "zupper"
+  stackTags:
+    schneider: "zupper"
+  tags:
+    schneider: "zupper"
 
 resources:
   Resources:
